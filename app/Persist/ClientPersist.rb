@@ -27,7 +27,7 @@ class ClientPersist
 
         json_client = JSON.pretty_generate(client_json)
 
-        File.open("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients/#{random_id}.json",'w') do |file|
+        File.open("database/clients/#{random_id}.json",'w') do |file|
             file.write(json_client)
         puts "Cliente criado com sucesso. Nome: #{name}, ID: #{random_id}"
         return client
@@ -37,7 +37,7 @@ class ClientPersist
     #Procura um Cliente no banco de dados pelo seu ID; retorna o cliente se existir, retorna nil se nao existir
     def read(id)
       controller = ClientController.new
-      file_path = "/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients/#{id}.json"
+      file_path = "database/clients/#{id}.json"
 
       if File.exist?(file_path)
         client_json = File.read(file_path)
@@ -58,7 +58,7 @@ class ClientPersist
     # Deleta um cliente no banco de dados pelo seu id; retorna true se o cliente foi deletado com sucesso. retorna false se houver algum problema
     def delete(id)
 
-        file_path = "/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients/#{id}.json"
+        file_path = "database/clients/#{id}.json"
 
         if File.exist?(file_path)
           File.delete(file_path)

@@ -27,7 +27,7 @@ class PersonalTrainerPersist
 
         json_pt = JSON.pretty_generate(pt_json)
 
-        File.open("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/pt/#{random_id}.json",'w') do |file|
+        File.open("database/pt/#{random_id}.json",'w') do |file|
             file.write(json_pt)
         puts "Personal Trainer criado com sucesso. Nome: #{name}, ID: #{random_id}"
         return personal_trainer
@@ -38,7 +38,7 @@ class PersonalTrainerPersist
     def read(id)
       controller = PersonalTrainerController.new
 
-      file_path = "/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/pt/#{id}.json"
+      file_path = "database/pt/#{id}.json"
 
       if File.exist?(file_path)
         pt_json = File.read(file_path)
@@ -60,7 +60,7 @@ class PersonalTrainerPersist
     # Função que deleta um personal trainer pelo seu id; retorna true se for deletado com sucesso, retorna false se houver algum problema 
     def delete(id)
         
-        file_path = "/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/pt/#{id}.json"
+        file_path = "database/pt/#{id}.json"
 
         if File.exist?(file_path)
           File.delete(file_path)

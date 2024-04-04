@@ -13,18 +13,18 @@ end
 def delete_cache(option)
   case option
   when 1
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/avaliations")
+    delete_files_in_folder("database/avaliations")
   when 2
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients")
+    delete_files_in_folder("database/clients")
   when 3
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/pt")
+    delete_files_in_folder("database/pt")
   when 4
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/wp")
+    delete_files_in_folder("database/wp")
   when 5
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/avaliations")
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients")
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/pt")
-    delete_files_in_folder("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/wp")
+    delete_files_in_folder("database/avaliations")
+    delete_files_in_folder("database/clients")
+    delete_files_in_folder("database/pt")
+    delete_files_in_folder("database/wp")
   else
     puts "Opção inválida"
   end

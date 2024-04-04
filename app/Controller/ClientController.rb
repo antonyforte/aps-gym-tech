@@ -32,7 +32,7 @@ class ClientController
     def add_avaliation(client_id, avaliation_id)
 
         #abrir o arquivo do cliente com o id tal
-        file_path = "/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients/#{client_id}.json"
+        file_path = "../../database/clients/#{client_id}.json"
         client_json = JSON.parse(File.read(file_path))
 
         #salvar na lista

@@ -28,7 +28,7 @@ class AvaliationPersist
 
         json_client = JSON.pretty_generate(client_json)
 
-        File.open("/home/antonioforte/Documentos/Faculdade/APS/Projeto/gymTech/database/clients/#{random_id}.json",'w') do |file|
+        File.open("database/clients/#{random_id}.json",'w') do |file|
             file.write(json_client)
         puts "Cliente criado com sucesso. Nome: #{name}, ID: #{random_id}"
         return client
