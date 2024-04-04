@@ -1,4 +1,4 @@
-class MeasuresPersist < Persist
+class MeasuresPersist
 
     def create()
     end

@@ -1,3 +1,5 @@
+#Modelo da entidade Exercicio
+
 class Exercise
     attr_accessor :num_aparelho, :name, :series, :reps
     

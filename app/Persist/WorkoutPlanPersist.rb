@@ -1,4 +1,4 @@
-class WorkoutPlanPersist < Persist
+class WorkoutPlanPersist
 
     def create()
     end

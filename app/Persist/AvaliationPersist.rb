@@ -1,12 +1,14 @@
-require_relative 'Persist'
 
 require 'json'
 require 'securerandom'
 
 require_relative '../Model/Avaliation'
 
-class AvaliationPersist < Persist
 
+# Classe de persistência da entidade Avaliação
+class AvaliationPersist
+
+    # Cria uma avaliação 
     def create(client_id, pt_id, date)
 
         avaliation = Avaliation.new(name,age,cell_number)
@@ -34,6 +36,7 @@ class AvaliationPersist < Persist
 
     end
 
+    # Deleta uma avaliação
     def delete()
     end
 end

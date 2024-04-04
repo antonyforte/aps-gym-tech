@@ -1,3 +1,5 @@
+#Funções apenas para auxiilio no desenvolvimento do software
+
 require 'fileutils'
 
 def delete_files_in_folder(folder_path)

@@ -1,3 +1,5 @@
+#Modelo da entidade Cliente
+
 class Client
     attr_accessor :id, :name, :age, :cell_number, :avaliations
 

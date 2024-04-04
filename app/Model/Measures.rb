@@ -1,3 +1,5 @@
+#Modelo da entidade Medidas
+
 class Measures
 
     attr_accessor :id, :height, :weight,

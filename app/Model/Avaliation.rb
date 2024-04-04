@@ -1,3 +1,4 @@
+#Modelo da entidade Avaliação
 class Avaliation
     attr_accessor :id, :client, :personal_trainer, :date, :workout_plan
 

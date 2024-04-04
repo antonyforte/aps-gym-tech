@@ -1,3 +1,5 @@
+#INCLUSÃO DO MVC
+
 #Models
 Dir["app/Model/*.rb"].each { |file| require_relative file }
 
@@ -13,30 +15,15 @@ Dir["app/Persist/*.rb"].each { |file| require_relative file}
 
 require_relative 'lib/utils'
 
+#Funções para limpar o banco de dados
 =begin
-delete_cache(5)
-
-cpersist = ClientPersist::new
-tpersist = PersonalTrainerPersist::new
-apersist = AvaliationPersist::new
-
-cpersist.create("Antonio",1,0)
-cpersist.create("Angelo",2,0)
-cpersist.create("Bianca",3,0)
-cpersist.create("Bruna ",4,0)
-cpersist.create("Bruna",5,0)
-cpersist.create("Julio",6,0)
-cpersist.create("Antonio",7,0)
-cpersist.create("Antonio",8,0)
-
-
-client = cpersist.read("Antonio")
-puts "#{client.age}"
+delete_cache(1) #1 - Avaliações
+delete_cache(2) #2 - Clientes
+delete_cache(3) #3 - Personal Trainers
+delete_cache(4) #4 - Tudo
 =end
 
-win = MainWindow.new
-win.signal_connect("destroy") {Gtk.main_quit}
+#Inicialização da Interface do Software
 
-win2 = PersonalTrainerLoginWindow.new
-win.signal_connect("destroy") {Gtk.main_quit}
-Gtk.main
+view_start = View.new
+view_start.run_view
