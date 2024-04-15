@@ -40,7 +40,7 @@ class PersonalTrainerDeleteWindow < Gtk::Window
 
   #Função que retorna para a janela anterior
   def backward_window
-    PersonalTrainerMainWindow.new.show_all
+    AdminMainWindow.new.show_all
     hide
   end
 
