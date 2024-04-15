@@ -4,6 +4,8 @@ require_relative '../Controller/ClientController'
 
 require_relative 'PersonalTrainerMainWindow'
 
+require_relative 'ClientDeleteWindow'
+
 # Visão da janela de registro de Clientes
 class ClientRegisterWindow < Gtk::Window
   
@@ -29,6 +31,7 @@ class ClientRegisterWindow < Gtk::Window
     register_client_button.signal_connect('clicked') do
         register_client(name_input_entry.text,age_input_entry.text,cell_number_input_entry.text)
     end
+
 
     backward_button = Gtk::Button.new(label: 'Voltar')
     backward_button.signal_connect('clicked') do

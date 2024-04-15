@@ -57,8 +57,9 @@ class ClientPersist
 
     # Deleta um cliente no banco de dados pelo seu id; retorna true se o cliente foi deletado com sucesso. retorna false se houver algum problema
     def delete(id)
-
-        file_path = "database/clients/#{id}.json"
+        client = read(id)
+        client_id = client.id
+        file_path = "database/clients/#{client_id}.json"
 
         if File.exist?(file_path)
           File.delete(file_path)

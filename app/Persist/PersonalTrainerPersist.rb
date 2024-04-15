@@ -59,8 +59,9 @@ class PersonalTrainerPersist
 
     # Função que deleta um personal trainer pelo seu id; retorna true se for deletado com sucesso, retorna false se houver algum problema 
     def delete(id)
-        
-        file_path = "database/pt/#{id}.json"
+        pt = read(id)
+        pt_id = pt.id
+        file_path = "database/pt/#{pt_id}.json"
 
         if File.exist?(file_path)
           File.delete(file_path)
