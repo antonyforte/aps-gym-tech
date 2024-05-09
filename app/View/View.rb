@@ -17,6 +17,8 @@ class View < Gtk::Window
       open_loginwindow
     end
 
+    
+
     admin_button = Gtk::Button.new(label: 'Admin')
     admin_button.override_background_color(:normal, Gdk::RGBA.new(7,0,0,1))
     admin_button.signal_connect('clicked') do
@@ -32,7 +34,7 @@ class View < Gtk::Window
     
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 5)
+    box = Gtk::Box.new(:vertical, 3)
     box.add(login_button)
     box.add(admin_button)
     box.add(quit_button)

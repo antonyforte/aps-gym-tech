@@ -8,9 +8,9 @@ require_relative '../Controller/ClientController'
 class ClientPersist
     
     #Salva um cliente em formato json e salva em 'database/client/{id}.json'
-    def create(name,age,cell_number)
+    def create(cpf,name,password,age,cell_number)
 
-        client = Client.new(name,age,cell_number)
+        client = Client.new(cpf,name,password,age,cell_number)
 
         random_id = SecureRandom.uuid
 
@@ -18,7 +18,9 @@ class ClientPersist
 
         client_json = {
             id: random_id,
+            cpf: cpf,
             name: name,
+            password: password,
             age: age,
             cell_number: cell_number,
             avaliation_ids: []
@@ -43,7 +45,7 @@ class ClientPersist
         client_json = File.read(file_path)
         client_data = JSON.parse(client_json) 
         
-        client = Client.new(client_data['name'], client_data['age'], client_data['cell_number'])
+        client = Client.new(client_data['cpf'], client_data['name'], client_data['password'], client_data['age'], client_data['cell_number'])
         client.id = client_data['id']
         client_data['avaliation_ids'].each do |avaliation_id|
               controller.add_avaliation(client.id, avaliation_id)

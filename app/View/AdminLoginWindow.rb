@@ -35,7 +35,7 @@ class AdminLoginWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 5)
+    box = Gtk::Box.new(:vertical, 4)
     box.add(name_input_entry)
     box.add(password_input_entry)
     box.add(enter_button)

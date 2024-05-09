@@ -15,18 +15,22 @@ class PersonalTrainerRegisterWindow < Gtk::Window
 
 
     #INPUTS
+    cpf_input_entry = Gtk::Entry.new    
     name_input_entry = Gtk::Entry.new
+    password_input_entry = Gtk::Entry.new
     cell_number_input_entry = Gtk::Entry.new
     salary_input_entry = Gtk::Entry.new
 
+    cpf_input_entry.placeholder_text = "Digite o CPF do Personal Trainer"
     name_input_entry.placeholder_text = "Digite o Nome Completo do Personal Trainer"
+    password_input_entry.placeholder_text = "Digite uma senha para o Personal Trainer"
     cell_number_input_entry.placeholder_text = "Digite o número do Personal Trainer"
     salary_input_entry.placeholder_text = "Digite o salário do Cliente"
 
     #BOTÕES
     register_pt_button = Gtk::Button.new(label: 'Registrar')
     register_pt_button.signal_connect('clicked') do
-        register_pt(name_input_entry.text,cell_number_input_entry.text,salary_input_entry.text)
+        register_pt(cpf_input_entry.text,name_input_entry.text,password_input_entry.text,cell_number_input_entry.text,salary_input_entry.text)
     end
 
     backward_button = Gtk::Button.new(label: 'Voltar')
@@ -35,8 +39,10 @@ class PersonalTrainerRegisterWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 5)
+    box = Gtk::Box.new(:vertical, 7)
+    box.add(cpf_input_entry)
     box.add(name_input_entry)
+    box.add(password_input_entry)
     box.add(cell_number_input_entry)
     box.add(salary_input_entry)
     box.add(register_pt_button)
@@ -52,9 +58,9 @@ class PersonalTrainerRegisterWindow < Gtk::Window
   end
 
   #Função que, utilizando um controlador, registra um Personal Trainer
-  def register_pt(name,cell_number,salary)
+  def register_pt(cpf,name,password,cell_number,salary)
     controller = PersonalTrainerController.new
-    controller.register_pt(name,cell_number,salary)
+    controller.register_pt(cpf,name,password,cell_number,salary)
     backward_window
   end
 

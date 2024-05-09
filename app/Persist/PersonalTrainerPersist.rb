@@ -8,10 +8,10 @@ require_relative '../Controller/PersonalTrainerController'
 class PersonalTrainerPersist
 
     # Função que adiciona um Peronal no banco de dados
-    def create(name, cell_number, salary)
+    def create(cpf, name, password, cell_number, salary)
         
 
-        personal_trainer = PersonalTrainer::new(name,cell_number,salary)
+        personal_trainer = PersonalTrainer::new(cpf,name,password,cell_number,salary)
 
         random_id = "su"+SecureRandom.uuid
 
@@ -19,7 +19,9 @@ class PersonalTrainerPersist
 
         pt_json = {
             id: random_id,
+            cpf: cpf,
             name: name,
+            password: password,
             cell_number: cell_number,
             salary: salary,
             avaliation_ids: []
@@ -44,7 +46,7 @@ class PersonalTrainerPersist
         pt_json = File.read(file_path)
         pt_data = JSON.parse(pt_json) 
         
-        pt = PersonalTrainer.new(pt_data['name'], pt_data['salary'], pt_data['cell_number'])
+        pt = PersonalTrainer.new(pt_data['cpf'], pt_data['name'], pt_data['password'], pt_data['salary'], pt_data['cell_number'])
         pt.id = pt_data['id']
         pt_data['avaliation_ids'].each do |avaliation_id|
               controller.add_avaliation(pt.id, avaliation_id)

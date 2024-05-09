@@ -9,11 +9,17 @@ require_relative '../Persist/ClientPersist'
 class ClientController
 
     #Função que registra um cliente, utilizando a Classe Persistência de Cliente
-    def register_client(name,age,cell_number)
+    def register_client(cpf,name,password,age,cell_number)
         
         persist = ClientPersist.new
-        persist.create(name,age,cell_number)
+        persist.create(cpf,name,password,age,cell_number)
 
+    end
+
+    #Função que busca e retorna um cliente, Utilizando a classe Persistência de Cliente
+    def read_client(client_id)
+        persist = ClientPersist.new
+        return persist.read(client_id)      
     end
 
     #Função que deleta um cliente, utilizando a Classe Persistência de Cliente
@@ -55,5 +61,22 @@ class ClientController
         else
             return true
         end
+    end
+
+    #Função que, utilizando a classe de Persistência retorna o id de todos os clientes cadastrados
+    def list_client()
+        persist = ClientPersist.new
+        diretorio = "database/clients"
+
+        #Busca todos os arquivos do banco de dados
+        files = Dir.glob(File.join(diretorio, "**","*"))
+        id = []
+
+        #Salva os seus ids na lista id
+        for file in files
+            id_code = File.basename(file, ".*")
+            id.push(id_code)
+        end
+        return id
     end
 end

@@ -1,4 +1,5 @@
 require 'json'
+require 'pathname'
 
 require_relative '../Model/PersonalTrainer'
 
@@ -8,9 +9,15 @@ require_relative '../Persist/PersonalTrainerPersist'
 class PersonalTrainerController
     
     #Função que registra um personal trainer
-    def register_pt(name,cell_number,salary)
+    def register_pt(cpf,name,password,cell_number,salary)
         persist = PersonalTrainerPersist.new
-        persist.create(name,cell_number,salary)
+        persist.create(cpf,name,password,cell_number,salary)
+    end
+
+    #Função que busca e retorna um personal trainer
+    def read_pt(pt_id)
+        persist = PersonalTrainerPersist.new
+        return persist.read(pt_id)      
     end
 
     #Função que deleta um personal trainer
@@ -49,5 +56,22 @@ class PersonalTrainerController
         else
             return true
         end
+    end
+
+    #Função que retorna uma lista com todos os ids dos personal Trainers cadastrados
+    def list_pt()
+        persist = PersonalTrainerPersist.new
+        diretorio = "database/pt"
+
+        #Busca todos os arquivos dentro do banco de dados
+        files = Dir.glob(File.join(diretorio, "**","*"))
+        id = []
+        
+        #Salva em id, todos os ids
+        for file in files
+            id_code = File.basename(file, ".*")
+            id.push(id_code)
+        end
+        return id
     end
 end

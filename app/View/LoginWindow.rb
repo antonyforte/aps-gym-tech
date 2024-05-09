@@ -16,15 +16,15 @@ class LoginWindow < Gtk::Window
 
     #INPUTS
     name_input_entry = Gtk::Entry.new
-    id_input_entry = Gtk::Entry.new
+    password_input_entry = Gtk::Entry.new
 
     name_input_entry.placeholder_text = "Digite o seu nome"
-    id_input_entry.placeholder_text = "Digite o seu ID"
+    password_input_entry.placeholder_text = "Digite a sua senha"
 
     #BOTÕES
     enter_button = Gtk::Button.new(label: 'Entrar')
     enter_button.signal_connect('clicked') do
-      logged_user(name_input_entry.text, id_input_entry.text)
+      logged_user(name_input_entry.text, password_input_entry.text)
     end
 
     backward_button = Gtk::Button.new(label: 'Voltar')
@@ -33,9 +33,9 @@ class LoginWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 5)
+    box = Gtk::Box.new(:vertical, 4)
     box.add(name_input_entry)
-    box.add(id_input_entry)
+    box.add(password_input_entry)
     box.add(enter_button)
     box.add(backward_button)
 
@@ -50,7 +50,29 @@ class LoginWindow < Gtk::Window
   end
 
   #Verifica o tipo de usuário e inicia a janela correspondente a ele
-  def logged_user(name,id)
+  def logged_user(name,password)
+
+    #Algoritmo para buscar o ID baseado no nome e senha
+    client_controller = ClientController.new
+    pt_controller = PersonalTrainerController.new
+    allc = client_controller.list_client
+    allp = pt_controller.list_pt
+    all = []
+    for c in allc 
+      all.push(client_controller.read_client(c))
+    end
+    for p in allp
+      all.push(pt_controller.read_pt(p))
+    end
+    id = 0
+    for info in all
+      if(info.name == name && info.password == password)
+        id = info.id
+        break
+      end
+    end
+
+    #Verifica o tipo de usuário(PT OU CLIENTE)
     if verify_input(name,id) == 1
 
       open_pt_main_window(id)
@@ -79,6 +101,8 @@ class LoginWindow < Gtk::Window
   def verify_input(name,id)
     client_controller = ClientController.new
     pt_controller = PersonalTrainerController.new
+    
+
     if id.start_with?("su")
       if pt_controller.login_authentication_verify(name,id) == true
         return 1
@@ -105,4 +129,3 @@ class LoginWindow < Gtk::Window
     dialog.destroy
   end
 end
-

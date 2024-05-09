@@ -30,7 +30,7 @@ class ClientDeleteWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 5)
+    box = Gtk::Box.new(:vertical, 3)
     box.add(id_input_entry)
     box.add(delete_client_button)
     box.add(backward_button)
