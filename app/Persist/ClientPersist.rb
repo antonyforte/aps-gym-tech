@@ -48,7 +48,7 @@ class ClientPersist
         client = Client.new(client_data['cpf'], client_data['name'], client_data['password'], client_data['age'], client_data['cell_number'])
         client.id = client_data['id']
         client_data['avaliation_ids'].each do |avaliation_id|
-              controller.add_avaliation(client.id, avaliation_id)
+              client.avaliations << avaliation_id
         end
         return client
       else

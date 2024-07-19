@@ -39,7 +39,6 @@ class ClientController
 
         #abrir o arquivo do cliente com o id tal
         file_path = "database/clients/#{client_id}.json"
-        puts("#{file_path}")
         client_json = JSON.parse(File.read(file_path))
 
         #salvar na lista
@@ -50,6 +49,34 @@ class ClientController
             file.write(JSON.pretty_generate(client_json))
         end
     end
+
+
+    # Função que deleta uma avaliação do JSON do cliente
+    def delete_avaliation(client_id, avaliation_id)
+        # Caminho para o arquivo JSON do cliente
+        file_path = "database/clients/#{client_id}.json"
+        
+        # Ler o arquivo JSON do cliente
+        if File.exist?(file_path)
+          client_json = JSON.parse(File.read(file_path))
+          
+          # Remover o ID da avaliação da lista
+          if client_json["avaliation_ids"].include?(avaliation_id)
+            client_json["avaliation_ids"].delete(avaliation_id)
+            
+            # Salvar as modificações no arquivo JSON do cliente
+            File.open(file_path, 'w') do |file|
+              file.write(JSON.pretty_generate(client_json))
+            end
+      
+            puts "Avaliação #{avaliation_id} removida com sucesso do cliente #{client_id}."
+          else
+            puts "Avaliação #{avaliation_id} não encontrada para o cliente #{client_id}."
+          end
+        else
+          puts "Arquivo do cliente #{client_id} não encontrado."
+        end
+      end
 
     #Função que verifica se as credenciais do cliente estão certas ##Utilizado pela view para fazer o login
     def login_authentication_verify(name,id)

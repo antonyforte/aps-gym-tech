@@ -71,18 +71,21 @@ class LoginWindow < Gtk::Window
         break
       end
     end
-
-    #Verifica o tipo de usuário(PT OU CLIENTE)
-    if verify_input(name,id) == 1
-
-      open_pt_main_window(id)
-
-    elsif verify_input(name,id) == 2
-      open_client_main_window(id)
-
-    else
+    if (id == 0)
       show_invalid_credentials_message
-    end 
+    else
+      if verify_input(name,id) == 1
+
+        open_pt_main_window(id)
+  
+      elsif verify_input(name,id) == 2
+        open_client_main_window(id)
+  
+      else
+        show_invalid_credentials_message
+      end 
+    end
+    #Verifica o tipo de usuário(PT OU CLIENTE)
   end
 
   #abre a janela de cliente

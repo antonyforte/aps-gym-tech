@@ -49,7 +49,7 @@ class PersonalTrainerPersist
         pt = PersonalTrainer.new(pt_data['cpf'], pt_data['name'], pt_data['password'], pt_data['salary'], pt_data['cell_number'])
         pt.id = pt_data['id']
         pt_data['avaliation_ids'].each do |avaliation_id|
-              controller.add_avaliation(pt.id, avaliation_id)
+              pt.avaliations << avaliation_id
         end
         return pt
       else

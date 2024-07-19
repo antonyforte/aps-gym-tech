@@ -5,7 +5,7 @@ require_relative 'PersonalTrainerMainWindow'
 # Visão da janela de registro de Clientes
 class AvaliationRegisterWindow < Gtk::Window
 
-  # Janela Principal
+  # Janela Principal, recebe um id do personal trainer e um do cliente
   def initialize(pt_id, client_id)
     super()
     set_title 'GymTech'

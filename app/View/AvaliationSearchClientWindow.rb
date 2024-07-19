@@ -6,13 +6,14 @@ require_relative 'AvaliationRegisterWindow'
 # Visão da janela de Pesquisar
 class AvaliationSearchClientWindow < Gtk::Window
 
-  # Janela Principal
-  def initialize(id)
+  # Janela Principal, recebe o ID do personal trainer e o tipo de página a qual a pesquisa deve chamar(1-fazer avaliação. 2-listar avaliação)
+  def initialize(id, type)
     super()
     set_title 'GymTech'
     set_default_size 200, 100
 
     @id_pt = id
+    @type = type
 
     # INPUTS
     id_input_entry = Gtk::Entry.new
@@ -48,8 +49,15 @@ class AvaliationSearchClientWindow < Gtk::Window
   def search_client(id)
     controller = ClientController.new
     if controller.read_client(id)
-      AvaliationRegisterWindow.new(@id_pt, id).show_all
-      hide
+      if (@type == 1)
+        AvaliationRegisterWindow.new(@id_pt, id).show_all
+        hide
+      elsif (@type == 2)
+        AvaliationListWindow.new(@id_pt,id, 0).show_all
+        hide
+      else
+        puts("Erro no tipo de Seleção da janela de Pesquisa de Avaliação")
+      end
     else
       show_invalid_credentials_message
     end

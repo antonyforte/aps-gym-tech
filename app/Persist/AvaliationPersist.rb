@@ -68,6 +68,7 @@ class AvaliationPersist
         return avaliation
     end
 
+    #Lê o id de uma avaliação e a retorna
     def read(id)
         controller = AvaliationController.new
         file_path = "database/avaliations/#{id}.json"
@@ -76,7 +77,7 @@ class AvaliationPersist
             avaliation_json = File.read(file_path)
             avaliation_data = JSON.parse(avaliation_json) 
 
-            avaliation = Avaliation.new(avaliation_data['client_id'], avaliation_data['pt_id'], avaliation_data['date'], avaliation_data['height'], avaliation_data['weight'], avaliation_data['shoulder'], avaliation_data['chest'], avaliation_data['waist'], avaliation_data['tummy'], avaliation_data['hip'], avaliation_data['arm'], avaliation_data['forearm'], avaliation_data['thigh'], avaliation_data['calf'] )
+            avaliation = Avaliation.new(avaliation_data['client_id'], avaliation_data['pt_id'], avaliation_data['date'],avaliation_data['workout_plan'], avaliation_data['height'], avaliation_data['weight'], avaliation_data['shoulder'], avaliation_data['chest'], avaliation_data['waist'], avaliation_data['tummy'], avaliation_data['hip'], avaliation_data['arm'], avaliation_data['forearm'], avaliation_data['thigh'], avaliation_data['calf'] )
             avaliation.id = avaliation_data['id']
         end
         return avaliation
@@ -89,6 +90,8 @@ class AvaliationPersist
         file_path = "database/avaliations/#{avaliation_id}.json"
 
         if File.exist?(file_path)
+            
+
             File.delete(file_path)
             puts "Avaliação com ID #{id} deletado com sucesso."
             return true

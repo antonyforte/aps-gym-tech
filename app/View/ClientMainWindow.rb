@@ -5,22 +5,17 @@ require_relative 'LoginWindow'
 class ClientMainWindow < Gtk::Window
 
   #Função da Janela principal
-  def initialize
-    super
+  def initialize(id)
+    super()
     set_title 'GymTech'
     set_default_size 200, 100
 
-    #BOTÕES
-    consult_workout_plan_button = Gtk::Button.new(label: 'Consultar Ficha de Treino')
-    consult_workout_plan_button.signal_connect('clicked') do
-     #FUNCTION TO WINDOW X 
-      #open_windowx
-    end
+    @id = id
 
-    consult_measures_button = Gtk::Button.new(label: 'Consultar Medidas')
-    consult_measures_button.signal_connect('clicked') do
-        #FUNCTION TO WINDOWX
-        #open_windowx
+    #BOTÕES
+    consult_avaliation_button = Gtk::Button.new(label: 'Consultar Avaliação')
+    consult_avaliation_button.signal_connect('clicked') do
+      show_avalations()
     end
 
     logout_button = Gtk::Button.new(label: 'Logout')
@@ -34,14 +29,19 @@ class ClientMainWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 4)
-    box.add(consult_workout_plan_button)
-    box.add(consult_measures_button)
+    box = Gtk::Box.new(:vertical, 3)
+    box.add(consult_avaliation_button)
     box.add(logout_button)
     box.add(quit_button)
 
     add(box)
   end
+
+  def show_avalations()
+    AvaliationListWindow.new(0,@id,0).show_all
+    hide
+  end
+
 
   #Função de logout
   def logout

@@ -3,7 +3,7 @@ require_relative 'LoginWindow'
 require_relative 'ClientDeleteWindow'
 require_relative 'ClientRegisterWindow'
 require_relative 'AvaliationSearchClientWindow'
-
+require_relative 'AvaliationDeleteWindow'
 #Visão da Janela principal de Peronal Trainer
 class PersonalTrainerMainWindow < Gtk::Window
   #Janela principal
@@ -23,7 +23,17 @@ class PersonalTrainerMainWindow < Gtk::Window
 
     register_avaliation_button = Gtk::Button.new(label: 'Fazer Avaliação')
     register_avaliation_button.signal_connect('clicked') do
-        avaliation_search_client
+        avaliation_search_client(1)
+    end
+
+    list_client_avaliation_button = Gtk::Button.new(label: 'Listar Avaliações de um Cliente')
+    list_client_avaliation_button.signal_connect('clicked') do
+      avaliation_search_client(2)
+    end
+
+    delete_avaliation_button = Gtk::Button.new(label: 'Deletar Avaliação')
+    delete_avaliation_button.signal_connect('clicked') do
+      delete_avaliation()
     end
 
     list_client_button = Gtk::Button.new(label: 'Listar Clientes')
@@ -47,9 +57,11 @@ class PersonalTrainerMainWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 6)
+    box = Gtk::Box.new(:vertical, 8)
     box.add(register_client_button)
     box.add(register_avaliation_button)
+    box.add(list_client_avaliation_button)
+    box.add(delete_avaliation_button)
     box.add(list_client_button)
     box.add(delete_client_button)
     box.add(logout_button)
@@ -72,12 +84,19 @@ class PersonalTrainerMainWindow < Gtk::Window
 
   #FUNÇÃO QUE ABRE A JANELA DE LISTAGEM DE CLIENTES
   def list_client_window
-    ClientListWindow.new.show_all
+    ClientListWindow.new(@id).show_all
     hide
   end
 
-  def avaliation_search_client
-    AvaliationSearchClientWindow.new(@id).show_all
+  # FUNÇÃO QUE ABRE A JANELA DE PESQUISA DE CLIENTE PARA AVALIAÇÕES
+  def avaliation_search_client(type)
+    AvaliationSearchClientWindow.new(@id, type).show_all
+    hide
+  end
+
+  # FUNÇÃO QUE ABRE A JANELA DE REMOÇÃO DE AVALIAÇÕES
+  def delete_avaliation()
+    AvaliationDeleteWindow.new(@id).show_all
     hide
   end
 

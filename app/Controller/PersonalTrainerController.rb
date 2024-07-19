@@ -45,6 +45,33 @@ class PersonalTrainerController
         end
     end
 
+    # Deleta uma avaliação do arquivo JSON do personal trainer
+    def delete_avaliation(pt_id, avaliation_id)
+        # Caminho para o arquivo JSON do Personal Trainer
+        file_path = "database/pt/#{pt_id}.json"
+        
+        # Ler o arquivo JSON do Personal Trainer
+        if File.exist?(file_path)
+          pt_json = JSON.parse(File.read(file_path))
+          
+          # Remover o ID da avaliação da lista
+          if pt_json["avaliation_ids"].include?(avaliation_id)
+            pt_json["avaliation_ids"].delete(avaliation_id)
+            
+            # Salvar as modificações no arquivo JSON do Personal Trainer
+            File.open(file_path, 'w') do |file|
+              file.write(JSON.pretty_generate(pt_json))
+            end
+      
+            puts "Avaliação #{avaliation_id} removida com sucesso do Personal Trainer #{pt_id}."
+          else
+            puts "Avaliação #{avaliation_id} não encontrada para o Personal Trainer #{pt_id}."
+          end
+        else
+          puts "Arquivo do Personal Trainer #{pt_id} não encontrado."
+        end
+      end
+
     #Função que verifica as credenciais do personal trainer. ##Utilizado na view de login
     def login_authentication_verify(name,id)
         

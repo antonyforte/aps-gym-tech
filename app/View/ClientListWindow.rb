@@ -5,11 +5,12 @@ require_relative 'PersonalTrainerMainWindow'
 class ClientListWindow < Gtk::Window
 
   #Janela Principal
-  def initialize
-    super
+  def initialize(id)
+    super()
     set_title 'GymTech'
     set_default_size 200, 100
 
+    @id = id
 
     backward_button = Gtk::Button.new(label: 'Voltar')
     backward_button.signal_connect('clicked') do
@@ -45,7 +46,7 @@ class ClientListWindow < Gtk::Window
 
   #Função que redireciona para a janela de login principal
   def backward_window
-    PersonalTrainerMainWindow.new.show_all
+    PersonalTrainerMainWindow.new(@id).show_all
     hide
   end
 
