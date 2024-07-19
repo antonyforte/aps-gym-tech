@@ -8,11 +8,12 @@ require_relative 'PersonalTrainerMainWindow'
 class ClientDeleteWindow < Gtk::Window
 
   #Janela Principal
-  def initialize
-    super
+  def initialize(id)
+    super()
     set_title 'GymTech'
     set_default_size 200, 100
 
+    @id = id
     #INPUTS
     id_input_entry = Gtk::Entry.new
 
@@ -40,7 +41,7 @@ class ClientDeleteWindow < Gtk::Window
 
   #Função que redireciona para a página anterior
   def backward_window
-    PersonalTrainerMainWindow.new.show_all
+    PersonalTrainerMainWindow.new(@id).show_all
     hide
   end
 

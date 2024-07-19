@@ -2,14 +2,18 @@ require 'gtk3'
 require_relative 'LoginWindow'
 require_relative 'ClientDeleteWindow'
 require_relative 'ClientRegisterWindow'
+require_relative 'AvaliationSearchClientWindow'
 
 #Visão da Janela principal de Peronal Trainer
 class PersonalTrainerMainWindow < Gtk::Window
   #Janela principal
-  def initialize
+  def initialize(id)
     super
     set_title 'GymTech'
     set_default_size 200, 100
+
+
+    @id = id
 
     #BOTÕES
     register_client_button = Gtk::Button.new(label: 'Registrar Cliente')
@@ -19,8 +23,7 @@ class PersonalTrainerMainWindow < Gtk::Window
 
     register_avaliation_button = Gtk::Button.new(label: 'Fazer Avaliação')
     register_avaliation_button.signal_connect('clicked') do
-        #FUNCTION TO WINDOW X
-        #open_windowx
+        avaliation_search_client
     end
 
     list_client_button = Gtk::Button.new(label: 'Listar Clientes')
@@ -57,19 +60,24 @@ class PersonalTrainerMainWindow < Gtk::Window
 
   #FUNÇÃO QUE ABRE A JANELA DE REGISTRO DE CLIENTES
   def register_client_window
-    ClientRegisterWindow.new.show_all
+    ClientRegisterWindow.new(@id).show_all
     hide
   end
 
   #FUNÇÃO QUE ABRE A JANELA DE EXCLUSÃO DE CLIENTES
   def delete_client_window
-    ClientDeleteWindow.new.show_all
+    ClientDeleteWindow.new(@id).show_all
     hide
   end
 
   #FUNÇÃO QUE ABRE A JANELA DE LISTAGEM DE CLIENTES
   def list_client_window
     ClientListWindow.new.show_all
+    hide
+  end
+
+  def avaliation_search_client
+    AvaliationSearchClientWindow.new(@id).show_all
     hide
   end
 

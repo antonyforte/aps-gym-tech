@@ -87,13 +87,13 @@ class LoginWindow < Gtk::Window
 
   #abre a janela de cliente
   def open_client_main_window(id)
-    ClientMainWindow.new.show_all
+    ClientMainWindow.new(id).show_all
     hide
   end
 
   #abre a janela de personal trainer
   def open_pt_main_window(id)
-    PersonalTrainerMainWindow.new.show_all
+    PersonalTrainerMainWindow.new(id).show_all()
     hide
   end
 
