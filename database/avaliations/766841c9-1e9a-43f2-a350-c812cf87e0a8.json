@@ -1,0 +1,20 @@
+{
+  "id": "766841c9-1e9a-43f2-a350-c812cf87e0a8",
+  "client_name": "Julia",
+  "client_id": "b9cc5a30-fefe-4a6f-83c9-8f763af0db92",
+  "pt_name": "Ricardo",
+  "pt_id": "su43c872b8-94dd-4e8a-9e34-dcbc7b9a48ca",
+  "date": "2024-07-29T19:25:06-03:00",
+  "workout_plan": "%",
+  "height": "30",
+  "weight": "50",
+  "shoulder": "50",
+  "chest": "50",
+  "waist": "50",
+  "tummy": "50",
+  "hip": "50",
+  "arm": "50",
+  "forearm": "50",
+  "thigh": "50",
+  "calf": "50"
+}

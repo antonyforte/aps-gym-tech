@@ -39,13 +39,17 @@ class AvaliationController
   end
 
 
-  # Dado um cliente retorna os ids das avaliações desse cliente
-  def client_list_avaliation(client_id)
+  # Dado um cliente e um pt retorna os ids das avaliações desse cliente
+  def client_list_avaliation(client_id, pt_id)
     
     client_Controller = ClientController.new
+    pt_controller = PersonalTrainerController.new
     client = client_Controller.read_client(client_id)
-
-    return client.avaliations
-
+    if (pt_id == 0)
+      return client.avaliations
+    else
+      pt = pt_controller.read_pt(pt_id)
+      return client.avaliations & pt.avaliations
+    end
   end
 end

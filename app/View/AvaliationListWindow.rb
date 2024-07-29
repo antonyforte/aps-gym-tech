@@ -32,7 +32,7 @@ class AvaliationListWindow < Gtk::Window
     @text_view.cursor_visible = false
     
     #Obtém a avaliação atual
-    avaliation = list_avaliations(id,count)
+    avaliation = list_avaliations(id,id_pt, count)
 
     client_controller = ClientController.new
     pt_controller = PersonalTrainerController.new
@@ -108,7 +108,7 @@ class AvaliationListWindow < Gtk::Window
   # Mostra a Avaliação anterior a atual
   def previous_avaliation(pt_id, client_id, count)
     controller = AvaliationController.new
-    limit = controller.client_list_avaliation(client_id)
+    limit = controller.client_list_avaliation(client_id, pt_id)
     if(count - 1 == 0)
       new_count = limit.size - 1
       AvaliationListWindow.new(pt_id, client_id, new_count).show_all
@@ -123,7 +123,7 @@ class AvaliationListWindow < Gtk::Window
   # Mostra a proxima avaliação
   def next_avaliation(pt_id, client_id, count)
     controller = AvaliationController.new
-    limit = controller.client_list_avaliation(client_id)
+    limit = controller.client_list_avaliation(client_id, pt_id)
     if(count + 1 == limit.size)
       new_count = 0
       AvaliationListWindow.new(pt_id, client_id, new_count).show_all
@@ -142,9 +142,9 @@ class AvaliationListWindow < Gtk::Window
   
 
   #Função que retorna a avaliação atual dada um contador
-  def list_avaliations(client_id, count)
+  def list_avaliations(client_id, pt_id, count)
     controller = AvaliationController.new
-    avaliation_ids = controller.client_list_avaliation(client_id)
+    avaliation_ids = controller.client_list_avaliation(client_id, pt_id)
     avaliation = show_avaliations(avaliation_ids[@count])
   end
 
