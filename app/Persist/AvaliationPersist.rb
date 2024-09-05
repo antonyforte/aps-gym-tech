@@ -23,7 +23,7 @@ class AvaliationPersist
         # Recupera a Data atual para adicionar na avaliação
         date = DateTime.now
         date.strftime("%d/%m/%Y")
-        workout_plan = "%"
+        workout_plan = ""
         avaliation = Avaliation.new(client_id, pt_id, date, workout_plan, height, weight, shoulder, chest, waist, tummy, hip, arm, forearm, thigh, calf)
 
 
@@ -70,7 +70,6 @@ class AvaliationPersist
 
     #Lê o id de uma avaliação e a retorna
     def read(id)
-        controller = AvaliationController.new
         file_path = "database/avaliations/#{id}.json"
 
         if File.exist?(file_path)

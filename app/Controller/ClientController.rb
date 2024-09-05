@@ -4,16 +4,21 @@ require_relative '../Model/Client'
 
 require_relative '../Persist/ClientPersist'
 
+require_relative '../DAO'
+
 
 #Controlador da entidade Cliente
 class ClientController
 
+    def initialize
+        @dao = ClientDAO.instance
+    end
+
     #Função que registra um cliente, utilizando a Classe Persistência de Cliente
     def register_client(cpf,name,password,age,cell_number)
-        
-        persist = ClientPersist.new
-        persist.create(cpf,name,password,age,cell_number)
 
+        client = Client.new(cpf,name,password,age,cell_number)
+        @dao.create(client)
     end
 
     #Função que busca e retorna um cliente, Utilizando a classe Persistência de Cliente

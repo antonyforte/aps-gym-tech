@@ -38,7 +38,6 @@ class PersonalTrainerPersist
 
     # Função que procura um Personal Trainer no banco de dados pelo seu id; Retorna o Personal Trainer se existir, retorna nil se nao houver
     def read(id)
-      controller = PersonalTrainerController.new
 
       file_path = "database/pt/#{id}.json"
 

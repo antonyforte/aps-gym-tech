@@ -3,6 +3,7 @@ require_relative 'PersonalTrainerMainWindow'
 require_relative '../Controller/AvaliationController'
 require_relative '../Controller/ClientController'
 require_relative '../Controller/PersonalTrainerController'
+require_relative '../Controller/WorkoutPlanController'
 
 
 
@@ -58,7 +59,7 @@ class AvaliationListWindow < Gtk::Window
 
     workout_plan_button = Gtk::Button.new(label: 'Consultar Ficha de Treino')
     workout_plan_button.signal_connect('clicked') do
-      ##FAZER
+      workout_plan_window(count, id, id_pt)
     end
 
     prev_button = Gtk::Button.new(label: 'Avaliação Anterior')
@@ -153,5 +154,25 @@ class AvaliationListWindow < Gtk::Window
     controller = AvaliationController.new
     avaliation = controller.read_avaliation(avaliation_id)
     return avaliation
+  end
+
+  def workout_plan_window(count, id, id_pt)
+    controller = AvaliationController.new
+    avaliation_ids = controller.client_list_avaliation(id, id_pt)
+    avaliation = show_avaliations(avaliation_ids[@count])
+    if(avaliation.workout_plan == "")
+      puts "Criou WP"
+      controller = AvaliationController.new
+      wp_controller = WorkoutPlanController.new
+      
+      wp = wp_controller.register_wp()
+      controller.add_wp(avaliation.id, wp.id)
+      WorkoutPlanMainWindow.new(wp.id,id_pt,id,count).show_all
+      hide
+    else
+      puts "Não criou WP"
+      WorkoutPlanMainWindow.new(avaliation.workout_plan,id_pt,id,count).show_all
+      hide
+    end
   end
 end

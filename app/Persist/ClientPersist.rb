@@ -38,7 +38,6 @@ class ClientPersist
 
     #Procura um Cliente no banco de dados pelo seu ID; retorna o cliente se existir, retorna nil se nao existir
     def read(id)
-      controller = ClientController.new
       file_path = "database/clients/#{id}.json"
 
       if File.exist?(file_path)

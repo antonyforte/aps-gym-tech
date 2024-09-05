@@ -4,6 +4,9 @@ require_relative 'ClientDeleteWindow'
 require_relative 'ClientRegisterWindow'
 require_relative 'AvaliationSearchClientWindow'
 require_relative 'AvaliationDeleteWindow'
+require_relative 'ExerciseRegisterWindow'
+require_relative 'ExerciseDeleteWindow'
+
 #Visão da Janela principal de Peronal Trainer
 class PersonalTrainerMainWindow < Gtk::Window
   #Janela principal
@@ -46,6 +49,16 @@ class PersonalTrainerMainWindow < Gtk::Window
         delete_client_window
     end
 
+    register_exercise_button = Gtk::Button.new(label: 'Cadastrar Exercício')
+    register_exercise_button.signal_connect('clicked') do
+        register_exercise_window
+    end
+
+    delete_exercise_button = Gtk::Button.new(label: 'Remover Exercício')
+    delete_exercise_button.signal_connect('clicked') do
+      delete_exercise_window
+    end
+
     logout_button = Gtk::Button.new(label: 'Logout')
     logout_button.signal_connect('clicked') do
         logout
@@ -57,13 +70,15 @@ class PersonalTrainerMainWindow < Gtk::Window
     end
 
     #CAIXA COM OS COMPONENTES DA JANELA
-    box = Gtk::Box.new(:vertical, 8)
+    box = Gtk::Box.new(:vertical, 10)
     box.add(register_client_button)
     box.add(register_avaliation_button)
     box.add(list_client_avaliation_button)
     box.add(delete_avaliation_button)
     box.add(list_client_button)
     box.add(delete_client_button)
+    box.add(register_exercise_button)
+    box.add(delete_exercise_button)
     box.add(logout_button)
     box.add(quit_button)
 
@@ -100,6 +115,17 @@ class PersonalTrainerMainWindow < Gtk::Window
     hide
   end
 
+  # FUNÇÃO QUE ABRE A JANELA DE CADASTRAR EXERCICIOS
+  def register_exercise_window()
+    ExerciseRegisterWindow.new(@id).show_all
+    hide
+  end
+
+  # FUNÇÃO QUE DELETA UM EXERCICIO
+  def delete_exercise_window()
+    ExerciseDeleteWindow.new(@id).show_all
+    hide
+  end
   #Função de Logout
   def logout
     LoginWindow.new.show_all

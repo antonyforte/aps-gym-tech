@@ -52,4 +52,17 @@ class AvaliationController
       return client.avaliations & pt.avaliations
     end
   end
+
+  def add_wp(id, wp_id)
+    file_path = "database/avaliations/#{id}.json"
+    avaliation_json = JSON.parse(File.read(file_path))
+
+    #salvar na lista
+    avaliation_json["workout_plan"] << wp_id
+
+    #alterar o arquivo com as modificações
+    File.open(file_path, 'w') do |file|
+        file.write(JSON.pretty_generate(avaliation_json))
+    end
+  end
 end
